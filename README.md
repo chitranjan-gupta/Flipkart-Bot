@@ -26,12 +26,13 @@ $ source venv/bin/activate
 $ pip3 install -U -r requirements.tt
 ```
 ### Environment Variables
-Telegram Bot Token must be added in your environment variables. To know how to add the token visit [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki/Using-Flipkart-Bot).
-Start the program
-
-```bas* 
-  pytho bot.py
+Properly setup the enviroment variables or populate bot.py with the values. Setting the environment variables is advised as some of the values are sensitive data, and should be kept secret. 
+* BOT_TOKEN - Telegram Bot Token. Obtain your bot token from [Bot Father](https://t.me/BotFather). To know how to add the token visit [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki/Using-Flipkart-Bot).
+### Run the bot
+```bash
+$ python3 bot.py
 ```
+Now go and ```/start``` the bot. If everything went fine, the bot will respond with welcome message.
 ## License
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
