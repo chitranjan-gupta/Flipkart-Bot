@@ -1,77 +1,97 @@
-import re
-import time
-import requests
+from re import sub, IGNORECASE
+from requests import Session
 from bs4 import BeautifulSoup
-from aiogram import *
-import logging
-import os
+from aiogram import Bot, Dispatcher, types, executor
+from logging import basicConfig, INFO
+from os import environ
+import asyncio
 
-BOT_TOKEN = os.environ.get('token') #Token used by telegram to authorize the use of bot
-logging.basicConfig(level=logging.INFO)
-prices = []
-url = "https://www.flipkart.com/oneplus-bullets-wireless-z2-bluetooth-headset/p/itm4c3852314bb61"
-status = False
-Time = 60*60
+BOT_TOKEN = environ.get(
+  'token')  # Token used by telegram to authorize the use of bot; replace with your token
+TIME = 60 * 60  # Check the price every given seconds; change the time according to your need
+url = "https://www.flipkart.com/oneplus-bullets-wireless-z2-bluetooth-headset/p/itm4c3852314bb61"  # default url for demo purpose
+status = False # Status of tracker 
+prices = [] # array of price changes
 
-async def Request(message: types.Message):
-    session = requests.Session()
-    session.headers.update({
-        'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-        'Accept-Language':'en-US, en;q=0.5'
-    })
-    data = session.get(url)
-    if data.status_code == 200:
-        soup = BeautifulSoup(data.content,'lxml')
-        pricediv = soup.find("div",attrs={"class":'_30jeq3 _16Jk6d'})
-        currentprice = float(re.sub("[₹,$]","",pricediv.string,flags=re.IGNORECASE))
-        if len(prices) >= 1:
-            if currentprice < prices[-1]:
-                prices.append(currentprice)
-                await message.answer(f"Current Price: ₹{currentprice}")
-        else:
-            prices.append(currentprice)
-            await message.answer(f"Current Price: ₹{currentprice}")
+def Telegram():
+  bot = Bot(token=BOT_TOKEN)
+  disp = Dispatcher(bot=bot)
+
+  @disp.message_handler(commands=['start'])
+  async def send_welcome(message: types.Message):
+    await message.answer(
+      f"""Hi! {message['from']['first_name']} \n Welcome You to Flipkart Product Price Tracker Bot \n 
+    You can track the price of Flipkart Product by sending the link.\n You can send the link using the command /link url \n"""
+    )
+
+  @disp.message_handler(commands=['tstart'])
+  async def send_start(message: types.Message):
+    global status
+    if status == False:
+      status = True
+      await message.answer("Started Tracking...")
+      t1 = asyncio.create_task(Check(message=message))
+      await t1
     else:
-        print("Error")
+      await message.answer("Tracking is already running")
 
-bot = Bot(token=BOT_TOKEN)
-disp = Dispatcher(bot=bot)
-@disp.message_handler(commands=['start'])
-async def send_welcome(message: types.Message):
-  await message.answer(f"""Hi! {message['from']['first_name']} \n Welcome You to Flipkart Product Price Tracker Bot \n 
-  You can track the price of Flipkart Product by sending the link.\n You can send the link using the command /link url \n""")
+  @disp.message_handler(commands=['tstop'])
+  async def send_stop(message: types.Message):
+    global status
+    if status == True:
+      status = False
+      await message.answer("Stopped Tracking.")
+    else:
+      await message.answer("Tracking is already stopped.")
 
-@disp.message_handler(commands=['TStart'])
-async def send_welcome(message: types.Message):
-  global status,Time
-  if status == False:
-    status = True
-    await message.answer("Started Tracking...")
-    while status == True:
-      await Request(message)
-      time.sleep(Time)
+  @disp.message_handler(commands=['link'])
+  async def send_link(message: types.Message):
+    global url, prices
+    if status == False:
+      url = message['text'].replace("/link", "")
+      prices.clear()
+      await message.answer(
+        "Link is Added to tracking\n To Start Tracking send command /tstart \nand to Stop Tracking send command /tstop"
+      )
+    else:
+      await message.answer("Tracking is already running. Stop The Tracker and change the link")
+
+  @disp.message_handler(commands=['help'])
+  async def send_help(message: types.Message):
+    await message.reply("Type /start to Interact With The Bot")
+
+  executor.start_polling(disp)
+
+async def Request(url):
+  session = Session()
+  session.headers.update({
+    'User-Agent':
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+    'Accept-Language': 'en-US, en;q=0.5'
+  })
+  data = session.get(url)
+  if data.status_code == 200:
+    soup = BeautifulSoup(data.content, 'lxml')
+    pricediv = soup.find("div", attrs={"class": '_30jeq3 _16Jk6d'})
+    currentprice = float(sub("[₹,$]", "", pricediv.string, flags=IGNORECASE))
+    return currentprice
   else:
-    await message.answer("Tracking is already running")
+    print("Error")
+    return 0
 
-@disp.message_handler(commands=['TStop'])
-async def send_welcome(message: types.Message):
-  global status
-  if status == True:
-    status = False
-    await message.answer("Stopped Tracking.")
-  else:
-    await message.answer("Tracking is already stopped.")
-
-@disp.message_handler(commands=['link'])
-async def send_welcome(message: types.Message):
-  global status,url
-  if status == False:
-    url = message['text'].replace("/link","")
-    await message.answer("Link is Added to tracking\n To Start Tracking send command /TStart \nand to Stop Tracking send command /TStop")
-
-@disp.message_handler(commands=['help'])
-async def send_welcome(message: types.Message):
-  await message.reply("Type /start to Interact With The Bot")
+async def Check(message: types.Message):
+  global status, prices, TIME, url
+  while status == True:
+    currentprice = await Request(url)
+    if len(prices) >= 1:
+      if currentprice < prices[-1]:
+        prices.append(currentprice)
+        await message.answer("Current Price: " + str(currentprice))
+    else:
+      prices.append(currentprice)
+      await message.answer("Current Price: " + str(currentprice))
+    await asyncio.sleep(TIME)
 
 if __name__ == '__main__':
-  executor.start_polling(disp)
+  basicConfig(level=INFO)
+  Telegram()
