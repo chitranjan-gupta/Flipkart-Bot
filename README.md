@@ -7,17 +7,23 @@ Read the documentation on [wiki](https://github.com/chitranjan01/Flipkart-Bot/wi
 * [git](https://git-scm.com/)
 * [python](https://www.python.org/)
 ### Local Setup
+> The setup is given here is for a linux environment. (Debian)
 * Clone the project
 ```bash
- git clone https://github.com/chitranjan01/Flipkart-Bot.git
+$ git clone https://github.com/chitranjan01/Flipkart-Bot.git
 ```
 * Go to the project directory
 ```bash
- cd Flipkart-Bot
+$ cd Flipkart-Bot
+```
+* Create and activate virtual environment
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
 ```
 * Install python dependencies
 ```bash
-  pip install -U -r requirements.tt
+$ pip3 install -U -r requirements.tt
 ```
 ### Environment Variables
 Telegram Bot Token must be added in your environment variables. To know how to add the token visit [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki/Using-Flipkart-Bot).
