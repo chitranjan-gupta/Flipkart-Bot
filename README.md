@@ -4,29 +4,27 @@ Weary about continuously checking the decrease in the price of the product you w
 Read the documentation on [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki).
 ## Installation Guide
 ### Prerequisites
-* git
+* [git](https://git-scm.com/)
 * [python](https://www.python.org/)
 ### Local Setup
 * Clone the project
 ```bash
-$ git clone https://github.com/chitranjan01/Flipkart-Bot.git
+ git clone https://github.com/chitranjan01/Flipkart-Bot.git
 ```
 * Go to the project directory
 ```bash
-$ cd Flipkart-Bot
+ cd Flipkart-Bot
 ```
-
-Install python libraries
-
+* Install python dependencies
 ```bash
-  pip install -r requirements.txt
+  pip install -U -r requirements.tt
 ```
+### Environment Variables
 Telegram Bot Token must be added in your environment variables. To know how to add the token visit [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki/Using-Flipkart-Bot).
-
 Start the program
 
-```bash
-  python bot.py
+```bas* 
+  pytho bot.py
 ```
 ## License
 
