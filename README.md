@@ -33,6 +33,11 @@ Properly setup the enviroment variables or populate bot.py with the values. Sett
 $ python3 bot.py
 ```
 Now go and ```/start``` the bot. If everything went fine, the bot will respond with welcome message.
+## Dependencies
+* BeautifulSoup
+* requests
+* aiogram
+* lxml
 ## License
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
