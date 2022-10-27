@@ -6,8 +6,7 @@ from logging import basicConfig, INFO
 from os import environ
 import asyncio
 
-BOT_TOKEN = environ.get(
-  'token')  # Token used by telegram to authorize the use of bot; replace with your token
+BOT_TOKEN = environ.get('token')  # Token used by telegram to authorize the use of bot; replace with your token
 TIME = 60 * 60  # Check the price every given seconds; change the time according to your need
 url = "https://www.flipkart.com/oneplus-bullets-wireless-z2-bluetooth-headset/p/itm4c3852314bb61"  # default url for demo purpose
 status = False # Status of tracker 
