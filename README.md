@@ -1,13 +1,14 @@
 # Flipkart Product Price Tracking Telegram Bot.
 ## Description
 Weary about continuously checking the decrease in the price of the product you want to purchase from Flipkart? Do not worry; The Flipkart bot will help you in achieving it. The Flipkart bot will check the price every 24 hours. And if the price has decreased. Then it will send a notification on telegram.
-Read the documentation on [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki).
+## Run Live on Telegram
+ [Flipkart Bot](https://t.me/FlipkartPriceRangeBot)
 ## Installation Guide
 ### Prerequisites
 * [git](https://git-scm.com/)
 * [python](https://www.python.org/) (3.7 or higher)
 ### Local Setup
-> The setup is given here is for a linux environment. (Debian)
+> The setup is given here is for a linux environment.
 * Clone the project
 ```bash
 $ git clone https://github.com/chitranjan01/Flipkart-Bot.git
@@ -44,6 +45,11 @@ Now go and ```/start``` the bot. If everything went fine, the bot will respond w
 * requests
 * aiogram
 * lxml
+## Supported System
+* Linux
+* Windows
+* Android (Termux)
+## Documentation
+Read the documentation on [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki).
 ## License
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
