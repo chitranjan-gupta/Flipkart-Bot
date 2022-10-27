@@ -5,7 +5,7 @@ Read the documentation on [wiki](https://github.com/chitranjan01/Flipkart-Bot/wi
 ## Installation Guide
 ### Prerequisites
 * [git](https://git-scm.com/)
-* [python](https://www.python.org/)
+* [python](https://www.python.org/) (3.7 or higher)
 ### Local Setup
 > The setup is given here is for a linux environment. (Debian)
 * Clone the project
