@@ -2,7 +2,7 @@
 ## Description
 Weary about continuously checking the decrease in the price of the product you want to purchase from Flipkart? Do not worry; The Flipkart bot will help you in achieving it. The Flipkart bot will check the price every 24 hours. And if the price has decreased. Then it will send a notification on telegram.
 ## Run Live on Telegram
- [Flipkart Bot](https://telegram.dog/FlipkartPriceRangeBot)
+* [Flipkart Bot](https://telegram.dog/FlipkartPriceRangeBot)
 ## Installation Guide
 ### Prerequisites
 * [git](https://git-scm.com/)
