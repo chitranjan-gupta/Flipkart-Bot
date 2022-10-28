@@ -47,7 +47,7 @@ Now go and ```/start``` the bot. If everything went fine, the bot will respond w
 * lxml
 ## Supported Environment
 * Linux
-* Windows
+* [Windows](https://github.com/chitranjan01/Flipkart-Bot/wiki/Installation#windows)
 * Android (Termux)
 ## Documentation
 Read the documentation on [wiki](https://github.com/chitranjan01/Flipkart-Bot/wiki).
