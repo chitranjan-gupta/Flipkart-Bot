@@ -45,7 +45,7 @@ Now go and ```/start``` the bot. If everything went fine, the bot will respond w
 * requests
 * aiogram
 * lxml
-## Supported System
+## Supported Environment
 * Linux
 * Windows
 * Android (Termux)
