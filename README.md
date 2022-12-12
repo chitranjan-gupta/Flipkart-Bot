@@ -37,7 +37,6 @@ $ python3 bot.py
 Now go and ```/start``` the bot. If everything went fine, the bot will respond with welcome message.
 ## Supported commands
 * ```/start``` - Command to start the bot or check whether the bot is alive.
-* ```/link url``` - Replace the url with the Flipkart Product Link and send the command to add the link to tracker.
 * ```/tstart``` - Command to start the tracker.
 * ```/tstop``` - Command to stop the tracker.
 ## Dependencies
