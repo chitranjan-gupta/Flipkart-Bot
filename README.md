@@ -35,6 +35,7 @@ Properly setup the enviroment variables or populate bot.py with the values. Sett
 $ python3 bot.py
 ```
 Now go and ```/start``` the bot. If everything went fine, the bot will respond with welcome message.
+* Send the link of product to bot and send the command /tstart to start tracking.
 ## Supported commands
 * ```/start``` - Command to start the bot or check whether the bot is alive.
 * ```/tstart``` - Command to start the tracker.
